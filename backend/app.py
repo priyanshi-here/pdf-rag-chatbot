@@ -1,7 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-import os
+from utils.pdf_reader import extract_text_from_pdf
 import shutil
+import os
 
 app = FastAPI()
 
@@ -31,8 +32,10 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+    text = extract_text_from_pdf(file_path)
 
     return {
-        "filename": file.filename,
-        "message": "PDF uploaded successfully"
-    }
+    "message": "PDF uploaded successfully",
+    "filename": file.filename,
+    "text": text
+}
