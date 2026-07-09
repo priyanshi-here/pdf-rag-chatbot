@@ -4,6 +4,7 @@ import axios from "axios";
 function Upload() {
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [pdfText, setPdfText] = useState("");
 const handleUpload = async () => {
 
     if (!selectedFile) {
@@ -22,6 +23,7 @@ const handleUpload = async () => {
     );
 
     alert(response.data.message);
+    setPdfText(response.data.text);
 
 }
 catch(error){
@@ -46,6 +48,14 @@ catch(error){
 </button>
 
       <p>{selectedFile?.name}</p>
+      <hr />
+      <h3>Extracted Text</h3>
+      <textarea
+        value={pdfText}
+        rows={20}
+        cols={80}
+        readOnly
+/>
     </div>
   );
 }
