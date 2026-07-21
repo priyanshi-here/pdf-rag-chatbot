@@ -1,4 +1,5 @@
 import Upload from "./components/Upload";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -6,6 +7,8 @@ function App() {
       <h1>PDF RAG Chatbot</h1>
 
       <Upload />
+      <Chat />
+      
     </div>
   );
 }
